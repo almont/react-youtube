@@ -4,12 +4,10 @@
   "description": "Starter kit for React, Webpack (with Hot Module Replacement) and Babel.",
   "keywords": [
     "react",
+    "es6",
     "webpack",
     "babel",
-    "sass",
-    "hmr",
-    "starter",
-    "boilerplate"
+    "sass"
   ],
   "author": "Viktor Persson",
   "license": "MIT",
