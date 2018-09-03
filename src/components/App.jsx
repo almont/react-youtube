@@ -6,6 +6,7 @@ import VideoList from 'components/VideoList'
 import Pagination from 'components/Pagination'
 import Spinner from 'components/Spinner'
 import VideoDetail from 'components/VideoDetail'
+import Carousel from 'components/Carousel'
 
 
 export default class App extends React.PureComponent {
@@ -46,6 +47,7 @@ export default class App extends React.PureComponent {
 
   showDetail(data) {
     this.setState({videoDetail: data})
+    this.scrollUp()
   }
 
   hideDetail() {
@@ -66,7 +68,10 @@ export default class App extends React.PureComponent {
           }
 
           {(this.state.prevPageToken || this.state.nextPageToken) &&
-            <Pagination onSearch={this.onSearch.bind(this)} query={this.state.query} prev={this.state.prevPageToken} next={this.state.nextPageToken} />
+            <div>
+              <Pagination onSearch={this.onSearch.bind(this)} query={this.state.query} prev={this.state.prevPageToken} next={this.state.nextPageToken} />
+              <Carousel />
+            </div>
           }
         </div>
       )

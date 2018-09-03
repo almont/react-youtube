@@ -49,12 +49,12 @@ export default class Search extends Component {
 							}}
 							onKeyPress={this.doSearch.bind(this)}
 							error
+							value="metallica"
 						/>
 					:
 						<Input
 							id="searchInput"
 							fullWidth="true"
-							sele
 							placeholder="Pesquisar"
 							inputProps={{
 								'aria-label': 'Buscar',

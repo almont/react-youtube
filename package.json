@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-babel-starter",
+  "name": "youtube-react",
   "version": "0.1.0",
-  "description": "Starter kit for React, Webpack (with Hot Module Replacement) and Babel.",
+  "description": "",
   "keywords": [
     "react",
     "es6",
@@ -9,16 +9,16 @@
     "babel",
     "sass"
   ],
-  "author": "Viktor Persson",
-  "license": "MIT",
+  "author": "",
+  "license": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vikpe/react-webpack-babel-starter.git"
+    "url": ""
   },
   "bugs": {
-    "url": "https://github.com/vikpe/react-webpack-babel-starter/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/vikpe/react-webpack-babel-starter",
+  "homepage": "",
   "scripts": {
     "build": "yarn run clean-dist && webpack -p --config=configs/webpack/prod",
     "clean-dist": "rm -f -r -d dist",
@@ -48,6 +48,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.4.2",
     "react-hot-loader": "^4.3.4",
+    "react-youtube": "^7.6.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",
     "webpack": "^4.17.1",

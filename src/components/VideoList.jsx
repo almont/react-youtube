@@ -28,11 +28,9 @@ export default class VideoList extends Component {
 	
 	render() {
 		return (
-			<div>
-				<Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={8} className="list">
-					{this.state.items}
-				</Grid>
-			</div>
+			<Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={8} className="list">
+				{this.state.items}
+			</Grid>
 		)
 	}
 }
