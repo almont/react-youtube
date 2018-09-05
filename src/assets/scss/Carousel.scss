@@ -1,0 +1,21 @@
+// @import 'variables';
+@import 'mixin';
+
+.carousel-container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 1px solid red;
+}
+
+.carousel-container .card {
+	// position: relative;
+	display: inline-block;
+	margin: 0.2em;
+	width: 150px;
+	height: 150px;
+	@include transition(left 1s ease);
+}

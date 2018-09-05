@@ -6,7 +6,7 @@ import VideoList from 'components/VideoList'
 import Pagination from 'components/Pagination'
 import Spinner from 'components/Spinner'
 import VideoDetail from 'components/VideoDetail'
-import Carousel from 'components/Carousel'
+import Carousel from 'components/carousel/Carousel'
 
 
 export default class App extends React.PureComponent {
@@ -81,8 +81,9 @@ export default class App extends React.PureComponent {
   render() {
     return (
       <div className="app">
-        <Search onSearch={this.onSearch.bind(this)} />
-        {this.renderResults()}
+        {/* <Search onSearch={this.onSearch.bind(this)} />
+        {this.renderResults()} */}
+        <Carousel />
       </div>
     )
   }
