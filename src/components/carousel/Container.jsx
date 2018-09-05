@@ -16,55 +16,106 @@ export default class Container extends Component {
 		// Deve ter status null(resposta de busca vazia).
 	}
 
-	componentDidMount() {
-		// console.log('props', this.props.data)
+	goLeft(item) {
+		anime({
+			targets: item,
+			translateX: {
+				value: '-=10',
+				duration: 100,
+				easing: 'linear'
+			},
+			complete: (anim) => {
+
+				console.log('complete')
+
+				this.goLeft(item)
+			}
+		})
+	}
+
+	toLastPosition(item) {
+		const items = document.querySelectorAll('.card')
+		let lastX = items[items.length - 1].getBoundingClientRect().x
+		const lastW = items[items.length - 1].getBoundingClientRect().width
+		const margin = 6;
+
+		items.forEach(item => {
+			const itemPos = item.getBoundingClientRect()
+
+			if (itemPos.x > lastX) {
+				lastX = itemPos.x
+			}
+		})
+
+		anime({
+			targets: item,
+			translateX: {
+				value: ((lastX + (lastW * 2)) + margin),
+				duration: 0,
+				easing: 'linear'
+			}
+		})
+
+		console.log(lastW)
+	}
+
+	checkPosition() {
 
 		const items = document.querySelectorAll('.card')
-		items.forEach((item, key) => {
-			this.animate(item)
-		})
-
-		// const item = document.querySelector('.test')
-		// this.animate(item)
-	}
-	
-	animate(item) {
-		const itemPosition = item.getClientRects()[0]
-
-		let duration = ((item.attributes.minpos.value - itemPosition.x) - itemPosition.width)
-		duration = ((duration * 10) * -1)
 		
-		console.log(duration)
-		console.log('---')
+		items.forEach(item => {
+			const itemPos = item.getBoundingClientRect()
 
-		const keyframes = anime({
-			targets: item,
-			translateX: [
-				{value: ((item.attributes.minpos.value - itemPosition.x) - itemPosition.width), duration: duration, easing: 'linear'},
-				{value: (item.attributes.maxpos.value - itemPosition.width), duration: 0, easing: 'linear'},
-				{value: 0, duration: duration, easing: 'linear'}
-			],
-			loop: true
+			console.log('itemPos', itemPos.x)
+			console.log('container', this.props.container.getBoundingClientRect().x)
+			console.log('---')
+
+			if (itemPos.x < -itemPos.width) {
+				console.log('zerou')
+				this.toLastPosition(item)
+			}
+
 		})
+
+		
+
+		// const item = document.querySelector('.card')
+		// const itemPos = item.getBoundingClientRect()
+
+		// if (itemPos.x < -itemPos.width) {
+		// 	console.log('zerou')
+		// 	this.toLastPosition(item)
+		// }
+
+	}
+
+	componentDidMount() {
+		
+		const animationContainer = document.querySelector('.animation-container')
+		this.goLeft(animationContainer)
+
 
 		this.setState({
-			animePause: keyframes.pause,
-			animePlay: keyframes.play
+			items: this.props.items.props.children
+		}, () => {
+			setInterval(() => {
+				this.checkPosition()
+			}, 1000)
 		})
 	}
 
 	onMouseEnter() {
-		this.state.animePause();
+		// this.state.animePause();
 	}
 
 	onMouseLeave() {
-		this.state.animePlay();
+		// this.state.animePlay();
 	}
 
 	render() {
 		return (
-			<div onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
-				{this.props.items && this.props.items}
+			<div className="animation-container" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
+				{this.state.items}
 			</div>
 		)
 	}

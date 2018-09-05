@@ -15,7 +15,7 @@ export default class VideoCard extends Component {
 		super(props)
 	}
 
-	videoDetail() {
+	showDetail() {
 		videoDetail(this.props.data.link, data => {
 			this.props.showDetail(data.data.items)
 		})
@@ -42,7 +42,7 @@ export default class VideoCard extends Component {
 						</Typography>
 					</CardContent>
 					<CardActions>
-						<Button size="small" color="primary" onClick={this.videoDetail.bind(this)}>
+						<Button size="small" color="primary" onClick={this.showDetail.bind(this)}>
 							DETALHES DO VIDEO
         		</Button>
 					</CardActions>

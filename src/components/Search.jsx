@@ -19,14 +19,15 @@ export default class Search extends Component {
 
 	doSearch(e) {
 		this.setState({
-			inputError: searchInput.value.length < 2 ? true : false,
-			keyPressed: e.key
-		}, () => {
-			if (!this.state.inputError && (this.state.keyPressed === undefined || this.state.keyPressed === 'Enter')) {
-				this.setState({doSearch: true})
-				this.props.onSearch(searchInput.value)
+				inputError: searchInput.value.length < 2 ? true : false,
+				keyPressed: e.key
+			}, () => {
+				if (!this.state.inputError && (this.state.keyPressed === undefined || this.state.keyPressed === 'Enter')) {
+					this.setState({doSearch: true})
+					this.props.onSearch(searchInput.value)
+				}
 			}
-		})
+		)
 	}
 
 	render() {

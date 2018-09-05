@@ -11,10 +11,15 @@
 	border: 1px solid red;
 }
 
-.carousel-container .card {
-	// position: relative;
+.carousel-container .animation-container {
+	width: auto;
+	height: auto;
+}
+
+.carousel-container .animation-container .card {
 	display: inline-block;
-	margin: 0.2em;
+	// margin: 0.2em;
+	margin: 3px;
 	width: 150px;
 	height: 150px;
 	@include transition(left 1s ease);
