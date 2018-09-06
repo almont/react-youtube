@@ -16,100 +16,84 @@ export default class Container extends Component {
 		// Deve ter status null(resposta de busca vazia).
 	}
 
-	goLeft(item) {
-		anime({
-			targets: item,
-			translateX: {
-				value: '-=10',
-				duration: 100,
-				easing: 'linear'
-			},
-			complete: (anim) => {
-
-				console.log('complete')
-
-				this.goLeft(item)
-			}
-		})
-	}
-
 	toLastPosition(item) {
 		const items = document.querySelectorAll('.card')
-		let lastX = items[items.length - 1].getBoundingClientRect().x
-		const lastW = items[items.length - 1].getBoundingClientRect().width
-		const margin = 6;
+		let positionX = 0
 
-		items.forEach(item => {
-			const itemPos = item.getBoundingClientRect()
-
-			if (itemPos.x > lastX) {
-				lastX = itemPos.x
+		items.forEach(prop => {
+			const itemPos = prop.getBoundingClientRect().x
+			if (positionX < itemPos) {
+				positionX = itemPos
 			}
 		})
 
-		anime({
-			targets: item,
-			translateX: {
-				value: ((lastX + (lastW * 2)) + margin),
-				duration: 0,
-				easing: 'linear'
-			}
-		})
-
-		console.log(lastW)
+		positionX = Math.floor((positionX + item.getBoundingClientRect().width) - 12)
+		
+		item.style.WebkitTransform = `translateX(${positionX}px)`
+		item.style.MozTransform = `translateX(${positionX}px)`
+		item.style.msTransform = `translateX(${positionX}px)`
+		item.style.OTransform = `translateX(${positionX}px)`
+		item.style.transform = `translateX(${positionX}px)`
+		this.goLeft(item)
 	}
 
-	checkPosition() {
+	goLeft(item) {
+		if (this.state.play) {
+			const animation = anime({
+				targets: item,
+				translateX: {
+					value: '-=5',
+					duration: 50,
+					easing: 'linear'
+				},
+				complete: (anim) => {
+					const itemPos = item.getBoundingClientRect()
 
-		const items = document.querySelectorAll('.card')
-		
-		items.forEach(item => {
-			const itemPos = item.getBoundingClientRect()
+					if (itemPos.x < -itemPos.width) {
+						this.toLastPosition(item)
+					} else {
+						this.goLeft(item)
+					}
+				}
+			})
 
-			console.log('itemPos', itemPos.x)
-			console.log('container', this.props.container.getBoundingClientRect().x)
-			console.log('---')
+			this.setState({animation: animation})
+		}
+	}
 
-			if (itemPos.x < -itemPos.width) {
-				console.log('zerou')
-				this.toLastPosition(item)
-			}
+	arrangeItems(items) {
+		items.forEach((item, key) => {
+			const positionX = ((item.getBoundingClientRect().width + 12) * key)
 
+			item.style.WebkitTransform = `translateX(${positionX}px)`
+			item.style.MozTransform = `translateX(${positionX}px)`
+			item.style.msTransform = `translateX(${positionX}px)`
+			item.style.OTransform = `translateX(${positionX}px)`
+			item.style.transform = `translateX(${positionX}px)`
+			this.goLeft(item)
 		})
-
-		
-
-		// const item = document.querySelector('.card')
-		// const itemPos = item.getBoundingClientRect()
-
-		// if (itemPos.x < -itemPos.width) {
-		// 	console.log('zerou')
-		// 	this.toLastPosition(item)
-		// }
-
 	}
 
 	componentDidMount() {
-		
-		const animationContainer = document.querySelector('.animation-container')
-		this.goLeft(animationContainer)
-
-
 		this.setState({
-			items: this.props.items.props.children
+			items: this.props.items.props.children,
+			play: true
 		}, () => {
-			setInterval(() => {
-				this.checkPosition()
-			}, 1000)
+			const items = document.querySelectorAll('.card')
+			this.arrangeItems(items)
 		})
 	}
 
 	onMouseEnter() {
-		// this.state.animePause();
+		console.log('onMouseEnter')
+		this.setState({play: false})
+		this.state.animation.pause;
 	}
 
 	onMouseLeave() {
-		// this.state.animePlay();
+		console.log('onMouseLeave')
+		this.setState({play: true})
+		this.state.animation.play;
 	}
 
 	render() {
