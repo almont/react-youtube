@@ -1,5 +1,5 @@
 import 'assets/scss/App.scss'
-import React from 'react'
+import React, {Component} from 'react'
 import {getVideos} from '../youtube/api'
 import Search from 'components/Search'
 import VideoList from 'components/VideoList'
@@ -9,12 +9,12 @@ import VideoDetail from 'components/VideoDetail'
 import Carousel from 'components/carousel/Carousel'
 
 
-export default class App extends React.PureComponent {
+export default class App extends Component {
   constructor() {
     super()
     this.state = {}
   }
-
+  
   scrollUp() {
     var doc = document.documentElement
     var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
@@ -68,8 +68,8 @@ export default class App extends React.PureComponent {
           {this.state.queryResult
             ? 
               <div>
-                {/* <VideoList data={this.state.queryResult} onPagination={this.onPagination.bind(this)} showDetail={this.showDetail.bind(this)} /> */}
-                <Carousel data={this.state.queryResult} />
+                <VideoList data={this.state.queryResult} onPagination={this.onPagination.bind(this)} showDetail={this.showDetail.bind(this)} />
+                <Carousel data={this.state.queryResult} showDetail={this.showDetail.bind(this)} xsQuantity={12} smQuantity={6} mdQuantity={3} speed={5} />
               </div>
             : this.state.query && <Spinner />
           }

@@ -1,5 +1,5 @@
 import 'assets/scss/VideoList.scss'
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Grid from '@material-ui/core/Grid'
 import VideoCard from 'components/VideoCard'
 
@@ -28,7 +28,7 @@ export default class VideoList extends Component {
 	
 	render() {
 		return (
-			<Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={8} className="list">
+			<Grid container direction="row" justify="space-between" alignItems="stretch" spacing={8} className="list">
 				{this.state.items}
 			</Grid>
 		)

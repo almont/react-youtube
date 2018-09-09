@@ -4,10 +4,8 @@ import {videoDetail} from '../../youtube/api'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 
 
 export default class CarouselCard extends Component {
@@ -23,29 +21,20 @@ export default class CarouselCard extends Component {
 
 	render() {
 		return (
-			<Card className="carousel-card">
-				<CardMedia
-					className="media"
-					image={this.props.data.thumb}
-					title={this.props.data.title}
-				/>
-				<CardContent>
-					<Typography gutterBottom variant="headline">
-						{this.props.data.title}
-					</Typography>
-					<Typography variant="subheading" >
-						{this.props.data.channel}
-					</Typography>
-					<Typography variant="body2">
-						{this.props.data.description}
-					</Typography>
-				</CardContent>
-				<CardActions>
-					<Button size="small" color="primary" onClick={this.showDetail.bind(this)}>
-						DETALHES DO VIDEO
+			<Grid item xs={this.props.xsQuantity} sm={this.props.smQuantity} md={this.props.mdQuantity} className="carousel-card">
+				<Card>
+					<CardMedia
+						className="media"
+						image={this.props.data.thumb}
+						title={this.props.data.title}
+					/>
+					<CardActions>
+						<Button size="small" color="primary" onClick={this.showDetail.bind(this)}>
+							DETALHES DO VIDEO
 					</Button>
-				</CardActions>
-			</Card>
+					</CardActions>
+				</Card>
+			</Grid>
 		)
 	}
 }

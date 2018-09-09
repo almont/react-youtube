@@ -50,7 +50,6 @@ export default class Search extends Component {
 							}}
 							onKeyPress={this.doSearch.bind(this)}
 							error
-							value="metallica"
 						/>
 					:
 						<Input

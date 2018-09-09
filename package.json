@@ -20,9 +20,8 @@
   },
   "homepage": "",
   "scripts": {
-    "build": "yarn run clean-dist && webpack -p --config=configs/webpack/prod",
-    "clean-dist": "rm -f -r -d dist",
-    "start": "webpack-dev-server --config=configs/webpack/dev --inline --hot",
+    "dev": "webpack-dev-server --config=configs/webpack/dev --inline --hot",
+    "build": "rm -f -r -d dist && webpack -p --config=configs/webpack/prod",
     "test": "jest --watch --coverage --config=configs/jest.json"
   },
   "devDependencies": {

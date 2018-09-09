@@ -13,15 +13,11 @@ import YouTube from 'react-youtube'
 export default class VideoDetail extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {mounted: false}
+		this.state = {}
 	}
 
 	componentDidMount() {
-		this.setState({mounted: true, data: this.props.data[0]})
-	}
-
-	componentWillUnmount() {
-		this.setState({mounted: false})
+		this.setState({data: this.props.data[0]})
 	}
 
 	hideDetail() {
@@ -41,7 +37,7 @@ export default class VideoDetail extends Component {
 		}
 
 		return (
-			<YouTube // https://www.npmjs.com/package/react-youtube
+			<YouTube 
 				videoId={videoId}
 				opts={opts}
 				className="youtubePlayer"
