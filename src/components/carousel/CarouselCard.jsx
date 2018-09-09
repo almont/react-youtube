@@ -23,7 +23,7 @@ export default class CarouselCard extends Component {
 
 	render() {
 		return (
-			<Card className="card">
+			<Card className="carousel-card">
 				<CardMedia
 					className="media"
 					image={this.props.data.thumb}

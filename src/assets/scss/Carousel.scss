@@ -1,9 +1,9 @@
 // @import 'variables';
-@import 'mixin';
+// @import 'mixin';
 
 .carousel-container {
 	position: relative;
-	margin: 0;
+	margin: 2em 0;
 	padding: 0;
 	width: 100%;
 	// height: auto;
@@ -19,13 +19,12 @@
 		border: solid 1px green;
 	}
 
-	.card {
+	.carousel-card {
 		position: absolute;
 		display: inline-block;
 		// margin: 0.2em;
 		margin: 3px;
 		width: 150px;
 		height: 150px;
-		@include transition(left 1s ease);
 	}
 }

@@ -17,7 +17,7 @@ export default class Container extends Component {
 	}
 
 	toLastPosition(item) {
-		const items = document.querySelectorAll('.card')
+		const items = document.querySelectorAll('.carousel-card')
 		let positionX = 0
 
 		items.forEach(prop => {
@@ -34,66 +34,70 @@ export default class Container extends Component {
 		item.style.msTransform = `translateX(${positionX}px)`
 		item.style.OTransform = `translateX(${positionX}px)`
 		item.style.transform = `translateX(${positionX}px)`
-		this.goLeft(item)
 	}
 
-	goLeft(item) {
-		if (this.state.play) {
-			const animation = anime({
-				targets: item,
-				translateX: {
-					value: '-=5',
-					duration: 50,
-					easing: 'linear'
-				},
-				complete: (anim) => {
-					const itemPos = item.getBoundingClientRect()
+	goLeft() {
+		const speed = this.state.speed
+		const animation = anime({
+			targets: this.state.cards,
+			translateX: ('-=' + speed),
+			duration: (speed * 10),
+			easing: 'linear',
+			complete: (anim) => {
+
+				console.log('complete')
+
+				anim.animatables.forEach(item => {
+					const itemPos = item.target.getBoundingClientRect()
 
 					if (itemPos.x < -itemPos.width) {
-						this.toLastPosition(item)
-					} else {
-						this.goLeft(item)
+						this.toLastPosition(item.target)
 					}
-				}
-			})
+				})
 
-			this.setState({animation: animation})
-		}
+				this.goLeft()
+			}
+		})
+
+		this.setState({
+			animation: animation
+		})
 	}
 
-	arrangeItems(items) {
-		items.forEach((item, key) => {
-			const positionX = ((item.getBoundingClientRect().width + 12) * key)
+	arrangeItems(cards) {
+		this.setState({
+			cards: cards
+		}, () => {
+			cards.forEach((item, key) => {
+				const positionX = ((item.getBoundingClientRect().width + 12) * key)
 
-			item.style.WebkitTransform = `translateX(${positionX}px)`
-			item.style.MozTransform = `translateX(${positionX}px)`
-			item.style.msTransform = `translateX(${positionX}px)`
-			item.style.OTransform = `translateX(${positionX}px)`
-			item.style.transform = `translateX(${positionX}px)`
-			this.goLeft(item)
+				item.style.WebkitTransform = `translateX(${positionX}px)`
+				item.style.MozTransform = `translateX(${positionX}px)`
+				item.style.msTransform = `translateX(${positionX}px)`
+				item.style.OTransform = `translateX(${positionX}px)`
+				item.style.transform = `translateX(${positionX}px)`
+			})
+
+			this.goLeft()
 		})
 	}
 
 	componentDidMount() {
 		this.setState({
 			items: this.props.items.props.children,
+			speed: this.props.speed,
 			play: true
 		}, () => {
-			const items = document.querySelectorAll('.card')
-			this.arrangeItems(items)
+			this.arrangeItems(document.querySelectorAll('.carousel-card'))
 		})
 	}
 
 	onMouseEnter() {
-		console.log('onMouseEnter')
-		this.setState({play: false})
-		this.state.animation.pause;
+		this.state.animation.pause()
 	}
 
 	onMouseLeave() {
-		console.log('onMouseLeave')
-		this.setState({play: true})
-		this.state.animation.play;
+		this.state.animation.play()
 	}
 
 	render() {

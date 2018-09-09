@@ -87,7 +87,6 @@ export default class App extends React.PureComponent {
       <div className="app">
         <Search onSearch={this.onSearch.bind(this)} />
         {this.renderResults()}
-        {/* <Carousel /> */}
       </div>
     )
   }

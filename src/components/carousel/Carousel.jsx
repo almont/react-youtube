@@ -40,7 +40,7 @@ export default class Carousel extends Component {
 		return (
 			<div className="carousel-container">
 				{this.state.container &&
-					<Container container={this.state.container} items={this.carouselItems()} />
+					<Container container={this.state.container} items={this.carouselItems()} speed={5} />
 				}
 			</div>
 		)
