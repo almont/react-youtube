@@ -41,9 +41,9 @@ export default class Search extends Component {
 					?
 						<Input
 							id="searchInput"
-							fullWidth="true"
-							autoFocus="true"
-							required="true"
+							fullWidth={true}
+							autoFocus={true}
+							required={true}
 							placeholder="Pesquisar"
 							inputProps={{
 								'aria-label': 'Buscar',
@@ -54,7 +54,7 @@ export default class Search extends Component {
 					:
 						<Input
 							id="searchInput"
-							fullWidth="true"
+							fullWidth={true}
 							placeholder="Pesquisar"
 							inputProps={{
 								'aria-label': 'Buscar',

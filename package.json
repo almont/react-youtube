@@ -22,7 +22,18 @@
   "scripts": {
     "dev": "webpack-dev-server --config=configs/webpack/dev --inline --hot",
     "build": "rm -f -r -d dist && webpack -p --config=configs/webpack/prod",
-    "test": "jest --watch --coverage --config=configs/jest.json"
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/jest-css-modules"
+    },
+    "moduleNameMapper": {
+      "^.+\\.(jpg|jpeg)$": "jest-static-stubs/jpg",
+      "^.+\\.gif$": "jest-static-stubs/gif",
+      "^.+\\.png$": "jest-static-stubs/png",
+      "^.+\\.(eot|otf|svg|ttf|woff|woff2|mp3|m4a|aac|oga)$": "identity-obj-proxy"
+    }
   },
   "devDependencies": {
     "@material-ui/core": "^3.0.1",
@@ -43,11 +54,14 @@
     "identity-obj-proxy": "^3.0.0",
     "image-webpack-loader": "^4.3.1",
     "jest": "^23.5.0",
+    "jest-css-modules": "^1.1.0",
+    "jest-static-stubs": "0.0.1",
     "node-sass": "^4.9.3",
     "react": "^16.4.2",
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.4.2",
     "react-hot-loader": "^4.3.4",
+    "react-test-renderer": "^16.5.0",
     "react-youtube": "^7.6.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",
